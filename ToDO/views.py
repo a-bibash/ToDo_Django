@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 
@@ -12,4 +12,13 @@ def home(request):
         TODO.objects.create(
             Task=Task,
         )
-    return render(request, "home.html")
+        return redirect('/')
+    queryset = TODO.objects.all()
+    context = {"Task": queryset}
+    return render(request, "home.html", context)
+
+
+def delete_Task(request, id):
+    queryset = TODO.objects.get(id=id)
+    queryset.delete()
+    return redirect('/')
