@@ -3,43 +3,45 @@
 {% block home %}
 
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-  <div class="card" style="width: 45rem;">
+  <div class="card" style="width: 45rem">
     <div class="card-body">
-      <h5 class="card-title">ToDo App</h5>   
+      <h5 class="card-title">Update Tasks</h5>   
 
     <form class="was-validated"  method= 'Post' enctype = "multipart/form-data">
       {% csrf_token %} 
+      
       <div class="mb-3">
           <label for="validationTextarea" name = "Task" class="form-label"></label>
-          <textarea class="form-control" name = "Task" id="validationTextarea" placeholder="Enter your tasks" required></textarea>
+          <textarea class="form-control" name = "Task" id="validationTextarea"  required>{{Task.Task}}</textarea>
       </div>
+    
+
 
       <div class="d-flex justify-content-center mb-3">
-          <button id="addButton" class="btn btn-primary" type="submit" >ADD </button>
+          <button id="updateButton" class="btn btn-primary" type="submit" >Update </button>
       </div>
     </form>
-
 
   <div class="table-container" style="max-height: 300px; overflow-y: auto;">
     <table class="table" border = '1'>
       <thead>
         <tr>
-          <th scope="col" style= "width: 5%">S.N.</th>
-          <th scope="col" style = "width: 60%">Tasks</th>
-          <th scope="col" style = "width: 35%">Actions</th>
+          <th scope="col" style = "width: 5%">S.N.</th>
+          <th scope="col" style = "width: 60%" >Tasks</th>
+          <th scope="col" style = "width: 35%" >Actions</th>
         </tr>
       </thead>
       <tbody>
-        {%for Task in Task%}
+       
         <tr>
-          <th scope="row">{{forloop.counter}}</th>
+          <th scope="row">{{ request.GET.sn }}</th>
           <td>{{Task.Task}}</td>
           <td> 
-            <a href="/delete_Task/{{Task.id}}/" class="btn btn-danger" >Delete</a>
-            <a href="/update_Task/{{ Task.id }}/?sn={{ forloop.counter }}" class="btn btn-danger">Update</a>
+            <a href="/delete_Task/{{Task.id}}/" class="btn btn-danger">Delete</a>
+            <a href="/update_Task/{{Task.id}}/" class="btn btn-danger">Update</a>
           </td>
         </tr>
-        {%endfor %}
+       
       </tbody>
     </table>
   </div>
@@ -54,7 +56,7 @@
 document.getElementById("validationTextarea").addEventListener("keydown", function(event) {
   if (event.keyCode === 13) { // 13 is the Enter key
     event.preventDefault();
-    document.getElementById("addButton").click(); // Trigger the click event of the ADD button
+    document.getElementById("updateButton").click(); // Trigger the click event of the ADD button
   }
 });
 </script>
