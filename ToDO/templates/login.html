@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block home %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
+  <div class="card" style="width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title">Login</h5>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="username" class="form-control" id="username" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <div class="mt-3">
+        <p>Not signed up ? <a href="{% url 'register' %}">Register here</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById("firstName").addEventListener("keydown", function(event) {
+      if (event.keyCode === 13) { // 13 is the Enter key
+        event.preventDefault();
+        document.querySelector("button[type='submit']").click(); // Trigger the click event of the Register button
+      }
+    });
+    </script>
+{% endblock %}

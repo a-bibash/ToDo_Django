@@ -5,7 +5,7 @@ from .models import *
 # Create your views here.
 
 
-def home(request):
+def app(request):
     if request.method == "POST":
         data = request.POST
         Task = data.get("Task")
@@ -15,14 +15,13 @@ def home(request):
 
     queryset = TODO.objects.all()
     context = {"Task": queryset}
-    return redirect('/')
-    return render(request, "home.html", context)
+    return render(request, "app.html", context)
 
 
 def delete_Task(request, id):
     queryset = TODO.objects.get(id=id)
     queryset.delete()
-    return redirect('/')
+    return redirect('/app')
 
 
 def update_Task(request, id):
@@ -32,45 +31,18 @@ def update_Task(request, id):
         Task = data.get("Task")
         queryset.Task = Task
         queryset.save()
-        from django.shortcuts import render, redirect
-
-
-# Create your views here.
-
-
-def home(request):
-    if request.method == "POST":
-        data = request.POST
-        Task = data.get("Task")
-        TODO.objects.create(
-            Task=Task,
-        )
-        return redirect('/')
-    queryset = TODO.objects.all()
-    context = {"Task": queryset}
-    
-    return render(request, "home.html", context)
-
-
-def delete_Task(request, id):
-    queryset = TODO.objects.get(id=id)
-    queryset.delete()
-    return redirect('/')
-
-
-def update_Task(request, id):
-    queryset = TODO.objects.get(id=id)
-    if request.method == "POST":
-        data = request.POST
-        Task = data.get("Task")
-        queryset.Task = Task
-        queryset.save()
-        return redirect('/')
+        return redirect('/app')
 
     context = {"Task": queryset}
 
     return render(request, "update.html", context)
-
     context = {"Task": queryset}
-
     return render(request, "update.html", context)
+
+
+def register(request):
+    return render(request, "register.html")
+
+
+def login(request):
+    return render(request, "login.html")
