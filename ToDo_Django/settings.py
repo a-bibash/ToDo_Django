@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#w%-7=l_ei@_yk%yyy(4@@mvn4lkodyewzot%p3z#f22qkr56+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["to-do-django-doxhb510n-bibash-adhikaris-projects.vercel.app",
+ALLOWED_HOSTS = ["to-do-django-bibash-adhikaris-projects.vercel.app/",
                 "abibash.com.np"]
 
 
